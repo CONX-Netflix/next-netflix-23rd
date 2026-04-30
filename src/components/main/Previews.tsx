@@ -18,10 +18,10 @@ export default function Previews() {
 
   return (
     <section className="py-6">
-      <h2 className="text-heading1 mb-4 px-7 text-white">Previews</h2>
+      <h2 className="text-heading1 mb-4 px-4 text-white">Previews</h2>
 
       {/* 가로 스크롤 컨테이너 */}
-      <div className="no-scrollbar flex gap-4 overflow-x-auto scroll-smooth px-7">
+      <div className="no-scrollbar flex gap-4 overflow-x-auto scroll-smooth px-3">
         {movies.map((movie) => (
           <button
             key={movie.id}
