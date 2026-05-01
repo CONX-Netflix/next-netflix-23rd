@@ -35,16 +35,17 @@ export default function Featured() {
           priority
         />
         <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-transparent" />
+        {/* Top 10 배지 영역 (임의로 #1 설정) */}
+        <div className="absolute inset-x-0 bottom-6 z-10 flex items-center justify-center gap-1.5">
+          <Image src={Top10Icon} alt="TOP 10" width={24} height={24} />
+          <span className="text-body2 font-bold tracking-tight text-white">#1 in Korea Today</span>
+        </div>
       </div>
-      {/* Top 10 배지 영역 (임의로 #1 설정) */}
-      <div className="mb-5 flex items-center justify-center gap-1.5">
-        <Image src={Top10Icon} alt="TOP 10" width={24} height={24} />
-        <span className="text-body2 font-bold tracking-tight text-white">#1 in Korea Today</span>
-      </div>
+
       <div className="bg-main-gradient absolute inset-0" />
 
       {/* 하단 버튼 영역 */}
-      <div className="flex flex-col items-center py-6">
+      <div className="flex flex-col items-center pt-3 pb-6">
         {/* 버튼 그룹 */}
         <div className="flex w-full items-center justify-center gap-10 px-3">
           <button className="flex flex-col items-center gap-1 text-white">
