@@ -8,10 +8,9 @@ reviews:
   auto_review:
     enabled: true
     drafts: false
-
-  base_branches:
-    - 'master'
-    - 'dev'
+    base_branches:
+      - 'master'
+      - 'dev'
 
   instructions: |
     - 한국어 존댓말로 리뷰해주세요
