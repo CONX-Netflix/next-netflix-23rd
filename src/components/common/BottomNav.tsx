@@ -3,12 +3,18 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
+import HomeIcon from '@/assets/icons/ic-home.svg';
+import SearchIcon from '@/assets/icons/ic-search.svg';
+import ComingSoonIcon from '@/assets/icons/ic-comingsoon.svg';
+import DownloadsIcon from '@/assets/icons/ic-downloads.svg';
+import MoreIcon from '@/assets/icons/ic-more.svg';
+
 const NAV_ITEMS = [
-  { name: 'Home', icon: 'ic-home.svg', href: '/' },
-  { name: 'Search', icon: 'ic-search.svg', href: '/search' },
-  { name: 'Coming Soon', icon: 'ic-comingsoon.svg', href: '/coming-soon' },
-  { name: 'Downloads', icon: 'ic-downloads.svg', href: '/downloads' },
-  { name: 'More', icon: 'ic-more.svg', href: '/more' },
+  { name: 'Home', icon: HomeIcon, href: '/' },
+  { name: 'Search', icon: SearchIcon, href: '/search' },
+  { name: 'Coming Soon', icon: ComingSoonIcon, href: '/coming-soon' },
+  { name: 'Downloads', icon: DownloadsIcon, href: '/downloads' },
+  { name: 'More', icon: MoreIcon, href: '/more' },
 ];
 
 export default function BottomNav() {
@@ -28,7 +34,7 @@ export default function BottomNav() {
             >
               <div className={`relative h-6 w-6 ${isActive ? '' : 'opacity-40'}`}>
                 <Image
-                  src={`/assets/icons/${item.icon}`}
+                  src={item.icon}
                   alt={item.name}
                   fill
                   className={isActive ? '' : 'brightness-[0.55]'}

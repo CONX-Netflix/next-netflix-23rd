@@ -4,6 +4,11 @@ import Image from 'next/image';
 import { movieService } from '@/api/movieService';
 import { Movie } from '@/types/movie';
 
+import Top10Icon from '@/assets/icons/ic-top10.svg';
+import AddIcon from '@/assets/icons/ic-add.svg';
+import PlayIcon from '@/assets/icons/ic-play.svg';
+import InfoIcon from '@/assets/icons/ic-info.svg';
+
 export default function Featured() {
   const [movie, setMovie] = useState<Movie | null>(null);
 
@@ -33,7 +38,7 @@ export default function Featured() {
       </div>
       {/* Top 10 배지 영역 (임의로 #1 설정) */}
       <div className="mb-5 flex items-center justify-center gap-1.5">
-        <Image src="/assets/icons/ic-top10.svg" alt="TOP 10" width={24} height={24} />
+        <Image src={Top10Icon} alt="TOP 10" width={24} height={24} />
         <span className="text-body2 font-bold tracking-tight text-white">#1 in Korea Today</span>
       </div>
       <div className="bg-main-gradient absolute inset-0" />
@@ -43,23 +48,17 @@ export default function Featured() {
         {/* 버튼 그룹 */}
         <div className="flex w-full items-center justify-center gap-10 px-3">
           <button className="flex flex-col items-center gap-1 text-white">
-            <Image src="/assets/icons/ic-add.svg" alt="My List" width={24} height={24} />
+            <Image src={AddIcon} alt="My List" width={24} height={24} />
             <span className="text-caption1">My List</span>
           </button>
 
           <button className="bg-grey-600 flex items-center justify-center gap-2 rounded-md px-8 py-2 text-black transition-transform active:scale-95">
-            <Image
-              src="/assets/icons/ic-play.svg"
-              alt="Play"
-              width={20}
-              height={20}
-              className="brightness-0"
-            />
+            <Image src={PlayIcon} alt="Play" width={20} height={20} className="brightness-0" />
             <span className="text-label1 font-bold">Play</span>
           </button>
 
           <button className="flex flex-col items-center gap-1 text-white">
-            <Image src="/assets/icons/ic-info.svg" alt="Info" width={24} height={24} />
+            <Image src={InfoIcon} alt="Info" width={24} height={24} />
             <span className="text-caption1">Info</span>
           </button>
         </div>
