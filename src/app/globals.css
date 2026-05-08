@@ -66,3 +66,11 @@
   --z-index-nav: 50;
   --z-index-splash: 100;
 }
+
+@utility no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
