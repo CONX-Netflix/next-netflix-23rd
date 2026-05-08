@@ -1,4 +1,4 @@
-import TopNav from './TopNav';
+import TopNav from '../main/TopNav';
 import BottomNav from './BottomNav';
 import HomeIndicator from './HomeIndicator';
 
