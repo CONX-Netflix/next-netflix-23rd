@@ -14,20 +14,32 @@ export default function Featured() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
+    let isMounted = true;
     const fetchFeatured = async () => {
-      const movies = await movieService.getNowPlaying();
-      setMovie(movies.slice(0, 10)); //top10 위해 10개 추출
+      try {
+        const movies = await movieService.getNowPlaying();
+        if (!isMounted) return;
+        setMovie(movies.slice(0, 10)); //top10 위해 10개 추출
+      } catch (error) {
+        if (isMounted) setMovie([]);
+        console.error('Failed to fetch featured movies', error);
+      }
     };
     fetchFeatured();
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
-  //3초에 한번씩 영화 rotation
+  //5초에 한번씩 영화 rotation
   useEffect(() => {
     if (movie.length === 0) return;
 
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % movie.length);
     }, 5000);
+
+    return () => clearInterval(timer);
   }, [movie]);
 
   const currentMovie = movie[currentIndex];
