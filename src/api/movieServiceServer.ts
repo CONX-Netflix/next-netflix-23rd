@@ -8,7 +8,7 @@ async function tmdbFetch(endpoint: string): Promise<Movie[]> {
   try {
     const separator = endpoint.includes('?') ? '&' : '?';
     const url = `${BASE_URL}${endpoint}${separator}api_key=${API_KEY}`;
-    const res = await fetch(url);
+    const res = await fetch(url, { signal: AbortSignal.timeout(3000) });
     if (!res.ok) throw new Error(`TMDB API error: ${res.status}`);
     const data = await res.json();
     return data.results ?? [];
