@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import SearchIcon from '@/assets/icons/ic-search-input.svg';
 import DeleteIcon from '@/assets/icons/ic-delete.svg';
 
@@ -12,7 +11,7 @@ interface SearchBarProps {
 export default function SearchBar({ value, onChange }: SearchBarProps) {
   return (
     <div className="bg-grey-800 flex h-13 items-center gap-2 px-5">
-      <Image src={SearchIcon} alt="Search" className="h-5 w-5 opacity-60" />
+      <SearchIcon className="h-5 w-5 opacity-60" />
       <input
         type="text"
         value={value}
@@ -21,7 +20,7 @@ export default function SearchBar({ value, onChange }: SearchBarProps) {
         className="text-label2 placeholder:text-grey-600 flex-1 bg-transparent text-white outline-none"
       />
       <button onClick={() => onChange('')}>
-        <Image src={DeleteIcon} alt="Clear" className="h-4 w-4" />
+        <DeleteIcon className="h-4 w-4" />
       </button>
     </div>
   );

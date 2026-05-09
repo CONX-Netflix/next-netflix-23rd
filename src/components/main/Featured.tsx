@@ -61,7 +61,7 @@ export default function Featured() {
         <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-transparent" />
         {/* Top 10 배지 영역 */}
         <div className="absolute inset-x-0 bottom-6 z-10 flex items-center justify-center gap-1.5">
-          <Image src={Top10Icon} alt="TOP 10" width={24} height={24} />
+          <Top10Icon className="h-6 w-6" />
           <span className="text-body2 font-bold tracking-tight text-white">
             #{currentIndex + 1} in Korea Today
           </span>
@@ -75,17 +75,17 @@ export default function Featured() {
         {/* 버튼 그룹 */}
         <div className="flex w-full items-center justify-center gap-11 px-3">
           <button className="flex flex-col items-center gap-1 text-white">
-            <Image src={AddIcon} alt="My List" width={24} height={24} />
+            <AddIcon className="h-6 w-6" />
             <span className="text-caption1">My List</span>
           </button>
 
           <button className="bg-grey-600 flex h-11 w-27 items-center justify-center gap-3 rounded-sm text-black transition-transform active:scale-95">
-            <Image src={PlayIcon} alt="Play" width={14} height={18} className="brightness-0" />
+            <PlayIcon className="h-[18px] w-[14px] text-black" />
             <span className="text-label1 font-bold">Play</span>
           </button>
 
           <button className="flex flex-col items-center gap-1 text-white">
-            <Image src={InfoIcon} alt="Info" width={24} height={24} />
+            <InfoIcon className="h-6 w-6" />
             <span className="text-caption1">Info</span>
           </button>
         </div>

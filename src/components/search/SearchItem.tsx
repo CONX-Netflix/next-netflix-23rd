@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import PlayIcon from '@/assets/icons/ic-play-circle.svg';
+import PlayCircleIcon from '@/assets/icons/ic-play-circle.svg';
 import { Movie } from '@/types/movie';
 
 interface SearchItemProps {
@@ -29,7 +29,7 @@ export default function SearchItem({ movie }: SearchItemProps) {
       </div>
       <span className="text-body2 flex-1 truncate px-4 text-white">{title}</span>
       <button className="shrink-0 pr-3">
-        <Image src={PlayIcon} alt="Play" width={28} height={28} />
+        <PlayCircleIcon className="h-7 w-7" />
       </button>
     </div>
   );
