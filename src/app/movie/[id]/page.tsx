@@ -2,18 +2,26 @@ import Image from 'next/image';
 import { movieServiceServer } from '@/api/movieServiceServer';
 import PlayIcon from '@/assets/icons/ic-play.svg';
 
-// 1. 시간 변환 유틸리티 (130분 -> 2시간 10분)
+// 시간 변환 유틸리티 (nn분 -> n시간 n분)
 const formatRuntime = (minutes: number) => {
   const hours = Math.floor(minutes / 60);
   const mins = minutes % 60;
   return hours > 0 ? `${hours}시간 ${mins}분` : `${mins}분`;
 };
 
-export default async function MovieDetailPage({ params }: { params: { id: string } }) {
-  const { id } = params;
+export default async function MovieDetailPage({
+  params,
+  searchParams,
+}: {
+  params: { id: string };
+  searchParams: Promise<{ type?: 'movie' | 'tv' }>;
+}) {
+  const resolvedParams = await params;
+  const resolvedSearchParams = await searchParams;
 
-  // 2. 서버에서 영화 상세 데이터 가져오기
-  const movie = await movieServiceServer.getMovieDetails(id);
+  const id = resolvedParams.id;
+  const type = resolvedSearchParams.type || 'movie';
+  const movie = await movieServiceServer.getMovieDetails(id, type);
 
   if (!movie)
     return (
@@ -22,7 +30,6 @@ export default async function MovieDetailPage({ params }: { params: { id: string
       </div>
     );
 
-  // 3. 발매 연도 추출
   const releaseYear = (movie.release_date || movie.first_air_date || '').split('-')[0];
 
   return (
@@ -44,18 +51,17 @@ export default async function MovieDetailPage({ params }: { params: { id: string
         <h1 className="text-3xl font-bold">{movie.title || movie.name}</h1>
 
         {/* 연도 및 시간/에피소드 정보 */}
-        {/* 여기 수정해야 됨 */}
         <div className="text-grey-400 flex items-center gap-3 text-sm font-semibold">
           <span>{releaseYear}</span>
           <span>
             {movie.runtime
               ? // Case 1: 영화인 경우 (런타임 표시)
                 formatRuntime(movie.runtime)
-              : movie.number_of_seasons > 1
-                ? // Case 3: TV쇼인데 시즌이 여러 개인 경우
+              : (movie.number_of_seasons ?? 0) > 1
+                ? // Case 2: TV쇼인데 시즌이 여러 개인 경우
                   `시즌 ${movie.number_of_seasons}개`
-                : // Case 2: TV쇼인데 시즌이 하나인 경우 (에피소드 개수 표시)
-                  `에피소드 ${movie.number_of_episodes}개`}
+                : // Case 3: TV쇼인데 시즌이 하나인 경우 (에피소드 개수 표시)
+                  `에피소드 ${movie.number_of_episodes ?? 0}개`}
           </span>
         </div>
 
