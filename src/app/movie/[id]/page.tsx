@@ -1,6 +1,35 @@
 import Image from 'next/image';
+import { Metadata } from 'next';
 import { movieServiceServer } from '@/api/movieServiceServer';
 import PlayIcon from '@/assets/icons/ic-play.svg';
+
+//SEO 설정 함수
+export async function generateMetadata({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ type?: 'movie' | 'tv' }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const { type = 'movie' } = await searchParams;
+
+  const movie = await movieServiceServer.getMovieDetails(id, type);
+
+  if (!movie) return { title: '영화 정보 없음' };
+
+  const title = movie.title || movie.name;
+
+  return {
+    title: title, // layout.tsx의 template 덕분에 "영화제목 | Nextflix"로 나옵니다.
+    description: movie.overview,
+    openGraph: {
+      title: title,
+      description: movie.overview,
+      images: [`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`], // 영화 포스터를 OG 이미지로!
+    },
+  };
+}
 
 // 시간 변환 유틸리티 (nn분 -> n시간 n분)
 const formatRuntime = (minutes: number) => {
